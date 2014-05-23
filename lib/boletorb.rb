@@ -40,12 +40,85 @@ module Boletorb
 
 		def valor_nominal
 			valor_formatado = (valor * 100).to_i.to_s
-			tamanho_valor = valor_formatado.size 
+			tamanho_valor = valor_formatado.size
 			for i in 1..(10 - tamanho_valor)
 				valor_formatado = "0#{valor_formatado}"
 			end
 			valor_formatado
 		end
+
+		def nosso_numero_formatado
+			numero = zeros_a_esquerda(nosso_numero, 12)
+			digito_verificador = modulo_11(numero)
+			"#{numero}#{digito_verificador}"
+		end
+
+		private
+			def zeros_a_esquerda(numero, quantidade)
+				tamanho_numero = numero.size
+				for i in 1..(quantidade - tamanho_numero)
+					numero = "0#{numero}"
+				end
+				numero
+			end
+
+			def modulo_11(numero)
+				numero.gsub!(".", "")
+				numero.gsub!(" ", "")
+
+				resultados = multiplicacoes_modulo_11(numero)
+
+				soma = resultados.inject(:+)
+				dv = 11 - (soma % 11)
+				dv = 1 if (dv == 10 || dv == 0)
+				dv
+			end
+
+			def modulo_10(numero)
+				resultado = multiplicacoes_modulo_10(numero)
+				soma = resultado.inject(:+)
+				10 - (soma % 10)
+			end
+
+			def multiplicacoes_modulo_11(num)
+				multi = 2
+				multiplicadores = []
+				resultados = []
+				for i in 0..(num.size - 1)
+					multiplicadores << multi
+					multi = multi + 1
+					multi = 2 if (multi > 9)
+				end
+				for i in 0..num.size - 1 
+					indice = num.size - 1 - i
+					valor = num[indice].to_i
+					resultados << valor * multiplicadores[i]
+				end
+				resultados	
+			end
+
+			def multiplicacoes_modulo_10(numero)
+				numero.gsub!(".", "")
+				numero.gsub!(" ", "")
+				resultado = []
+				multi = 2
+				for i in 0..numero.size - 1
+					valor = numero[numero.size - 1 - i].to_i * multi
+
+					#quebrando valor em todos os casos
+
+					while (((valor % 10) > - 1) && valor > 0)
+						resultado << valor % 10
+						valor = valor / 10
+					end
+					if (multi == 2)
+						multi = 1
+					else
+						multi = 2
+					end
+				end
+				resultado
+			end
 
 	end
 

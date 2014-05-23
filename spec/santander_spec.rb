@@ -59,16 +59,27 @@ describe Boletorb::Santander do
 
 		describe "Grupo 4" do
 			it "deveria gerar o digito verificador do boleto" do
-				@boleto.linha_digitavel[0..39].must_equal "03399.21132 75909.300032 10800.601022 9 "
+				@boleto.linha_digitavel[0..39].must_equal "03399.21132 75909.300032 10800.601022 6 "
 			end
 		end
 
 		describe "Grupo 5" do
 			it "deveria adicionar o fator de vencimento e valor nominal a linha digitavel" do
-				@boleto.linha_digitavel.must_equal "03399.21132 75909.300032 10800.601022 9 60730000029876"
+				@boleto.linha_digitavel.must_equal "03399.21132 75909.300032 10800.601022 6 60730000029876"
 			end
 		end
+	end
 
+	describe "#codigo_de_barras" do
+		before do
+			@boleto = boleto_santander
+		end
+
+		it "deveria retornar o codigo de barras com 44 posicoes" do
+			codigo_de_barras = @boleto.codigo_de_barras
+			codigo_de_barras.size.must_equal 44
+			codigo_de_barras.must_equal "03396607300000298769211375909300031080060102"
+		end
 	end
 
 end
@@ -80,7 +91,7 @@ def boleto_santander
 	cedente.modalidade_carteira = "102"
 	boleto = Boletorb::Santander.new
 	boleto.cedente = cedente
-	boleto.nosso_numero = "0930003108006"
+	boleto.nosso_numero = "93000310800"
 	boleto.vencimento = "24/05/2014"
 	boleto.valor = 298.76
 	boleto
