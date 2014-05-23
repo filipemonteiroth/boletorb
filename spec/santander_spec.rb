@@ -96,3 +96,22 @@ def boleto_santander
 	boleto.valor = 298.76
 	boleto
 end
+
+def boleto_santander_com_digito_1
+	sacado = Boletorb::Sacado.new
+	sacado.nome = "Filipe Monteiro"
+	sacado.documento = "039.578.663-08"
+	sacado.endereco = "Rua H 1300"
+	cedente = Boletorb::Cedente.new
+	cedente.banco = "033"
+	cedente.codigo_cedente = "2113759"
+	cedente.modalidade_carteira = "102"
+	cedente.carteira = "ECR"
+	boleto = Boletorb::Santander.new
+	boleto.cedente = cedente
+	boleto.sacado = sacado
+	boleto.nosso_numero = "93000310801"
+	boleto.vencimento = "24/05/2014"
+	boleto.valor = 298.76
+	boleto
+end

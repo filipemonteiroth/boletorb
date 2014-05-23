@@ -11,7 +11,10 @@ Gem::Specification.new do |s|
                     "Gemfile.lock",
                     "boletorb.gemspec",
                     "lib/boletorb.rb", 
-                    "lib/boletorb/santander.rb"]
+                    "lib/boletorb/santander.rb",
+                    "lib/boletorb/images/santander.jpg",
+                    "lib/boletorb/templates/santander.tlf"
+                  ]
   s.homepage    = 'http://rubygems.org/gems/boletorb'
   s.license     = 'MIT'
 
@@ -19,8 +22,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'thinreports', '0.7.7'
   s.add_dependency 'barby', '0.5.1'
   s.add_dependency 'chunky_png', '1.3.1'
-
-  #s.add_development_dependency "rspec", '~> 0'
 
   s.require_paths = ["lib"]
 end

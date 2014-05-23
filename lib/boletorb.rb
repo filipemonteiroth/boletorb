@@ -9,11 +9,16 @@ module Boletorb
 	end
 
 	class Cedente
-		attr_accessor :nome, :banco, :agencia, :codigo_cedente, :conta, :carteira, :modalidade_carteira
+		attr_accessor :nome, :banco, :agencia, :codigo_cedente, :conta, :carteira, :modalidade_carteira, :documento
 	end
 	
 	class Sacado
 		attr_accessor :documento, :nome, :endereco
+
+		def formatado
+			"#{nome} - #{documento}"
+		end
+
 	end
 
 	class Boleto
@@ -26,6 +31,8 @@ module Boletorb
 		def initialize
 			@linha_digitavel = ""
 			@ios = "0"
+			@aceite = "S"
+			@especie = "DM"
 		end									
 
 		def gera
@@ -69,8 +76,9 @@ module Boletorb
 				resultados = multiplicacoes_modulo_11(numero)
 
 				soma = resultados.inject(:+)
-				dv = 11 - (soma % 11)
-				dv = 1 if (dv == 10 || dv == 0)
+				resto = (soma % 11)
+				dv = 11 - resto
+				dv = 1 if (resto == 0 || resto == 1 || resto == 10)
 				dv
 			end
 
