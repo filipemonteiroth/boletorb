@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'boletorb'
   s.version     = '0.0.1'
-  s.date        = '2010-04-23'
+  s.date        = '2014-05-23'
   s.summary     = "Boleto RB"
   s.description = "A gem for generating brazilian 'boletos'"
   s.authors     = ["Filipe Monteiro"]
