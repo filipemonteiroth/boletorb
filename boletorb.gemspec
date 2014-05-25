@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
                     "lib/boletorb/images/santander.jpg",
                     "lib/boletorb/templates/santander.tlf"
                   ]
-  s.homepage    = 'http://rubygems.org/gems/boletorb'
+  s.homepage    = 'https://github.com/filipemonteiroth/boletorb'
   s.license     = 'MIT'
 
   #dependencies
