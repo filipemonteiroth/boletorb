@@ -55,20 +55,12 @@ module Boletorb
 		end
 
 		def nosso_numero_formatado
-			numero = zeros_a_esquerda(nosso_numero, 12)
+			numero = nosso_numero.rjust(12, "0")
 			digito_verificador = modulo_11(numero)
 			"#{numero}#{digito_verificador}"
 		end
 
 		private
-			def zeros_a_esquerda(numero, quantidade)
-				tamanho_numero = numero.size
-				for i in 1..(quantidade - tamanho_numero)
-					numero = "0#{numero}"
-				end
-				numero
-			end
-
 			def modulo_11(numero)
 				numero.gsub!(".", "")
 				numero.gsub!(" ", "")
@@ -112,9 +104,7 @@ module Boletorb
 				multi = 2
 				for i in 0..numero.size - 1
 					valor = numero[numero.size - 1 - i].to_i * multi
-
 					#quebrando valor em todos os casos
-
 					while (((valor % 10) > - 1) && valor > 0)
 						resultado << valor % 10
 						valor = valor / 10
