@@ -3,16 +3,16 @@ require 'boletorb'
 def gera_boleto
 	sacado = Boletorb::Sacado.new
 	sacado.nome = "Filipe Monteiro"
-	sacado.documento = "039.578.663-08"
-	sacado.endereco = "Rua H 1300"
+	sacado.documento = "012.345.678.90"
+	sacado.endereco = "Rua de Teste"
 	cedente = Boletorb::Cedente.new
 	cedente.banco = "033"
 	cedente.agencia = "1234"
 	cedente.codigo_cedente = "2113759"
-	cedente.documento = "17.491.032/0001-30"
+	cedente.documento = "11.111.111/0001-11"
 	cedente.modalidade_carteira = "102"
 	cedente.carteira = "CSR"
-	cedente.nome = "Grupo Caproni"
+	cedente.nome = "Empresa de teste"
 	boleto = Boletorb::Santander.new
 	boleto.aceite = "S"
 	boleto.especie = "DM"
