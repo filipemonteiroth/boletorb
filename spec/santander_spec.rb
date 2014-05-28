@@ -93,7 +93,7 @@ def boleto_santander
 	boleto.cedente = cedente
 	boleto.nosso_numero = "93000310800"
 	boleto.vencimento = "24/05/2014"
-	boleto.valor = 298.76
+	boleto.valor = 298.763829408324234
 	boleto
 end
 
@@ -112,6 +112,6 @@ def boleto_santander_com_digito_1
 	boleto.sacado = sacado
 	boleto.nosso_numero = "93000310801"
 	boleto.vencimento = "24/05/2014"
-	boleto.valor = 298.76
+	boleto.valor = 298.762193091238019238
 	boleto
 end

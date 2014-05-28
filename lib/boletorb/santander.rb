@@ -47,12 +47,13 @@ module Boletorb
 			def processa_layout
 				report = ThinReports::Report.new layout: "#{File.dirname(__FILE__)}/templates/santander.tlf"
 				report.start_new_page do |page|
+					valor_formatado = Money.new(formata_valor_para_inteiro, "BRL")			
+					puts valor_formatado.format		
 					page.item(:banco_img).src("#{File.dirname(__FILE__)}/images/santander.jpg")
 					page.item(:banco_img_rp).src("#{File.dirname(__FILE__)}/images/santander.jpg")
-					puts "Codigo de barras: #{codigo_de_barras}"
 					code = Barby::Code25Interleaved.new(codigo_de_barras)
 					barcode = StringIO.new(code.to_png({:height => 200, :xdim => 5, :margin => 5}))
-					page.item(:cod_barras).src(barcode)
+					page.item(:cod_barras).src(barcode)					
 					page.values banco: cedente.banco,										
 											banco_rp: cedente.banco,
 											linha_digitavel: linha_digitavel,
@@ -71,8 +72,8 @@ module Boletorb
 											cpf_cnpj: cedente.documento,
 											vencimento: vencimento,
 											vencimento_rp: vencimento,
-											valor_documento: "R$ #{valor}",
-											valor_documento_rp: "R$ #{valor}",
+											valor_documento: valor_formatado.format,
+											valor_documento_rp: valor_formatado.format,
 											sacado_formatado: sacado.formatado,
 											sacado_formatado_rp: sacado.formatado,
 											endereco_sacado: sacado.endereco,

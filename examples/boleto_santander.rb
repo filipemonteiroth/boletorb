@@ -20,7 +20,7 @@ def gera_boleto
 	boleto.sacado = sacado
 	boleto.nosso_numero = "93000310801"
 	boleto.vencimento = "24/05/2014"
-	boleto.valor = 298.76
+	boleto.valor = 13298.7612938
 	boleto.local_pagamento = "Pagavel em qualquer banco ate o vencimento"
 	boleto.gera_arquivo("boleto.pdf")
 end

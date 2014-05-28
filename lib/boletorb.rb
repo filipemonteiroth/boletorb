@@ -2,6 +2,7 @@
 $:.push File.join(File.dirname(__FILE__))
 
 require 'date'
+require 'money'
 
 module Boletorb
 
@@ -46,12 +47,16 @@ module Boletorb
 		end
 
 		def valor_nominal
-			valor_formatado = (valor * 100).to_i.to_s
+			valor_formatado = formata_valor_para_inteiro
 			tamanho_valor = valor_formatado.size
 			for i in 1..(10 - tamanho_valor)
 				valor_formatado = "0#{valor_formatado}"
 			end
 			valor_formatado
+		end
+
+		def formata_valor_para_inteiro
+			valor_formatado = (valor.round(2) * 100).to_i.to_s
 		end
 
 		def nosso_numero_formatado
