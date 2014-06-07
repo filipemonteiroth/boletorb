@@ -82,7 +82,9 @@ module Boletorb
 			def modulo_10(numero)
 				resultado = multiplicacoes_modulo_10(numero)
 				soma = resultado.inject(:+)
-				10 - (soma % 10)
+				modulo = 10 - (soma % 10)
+				return 0 if modulo == 10
+				modulo
 			end
 
 			def multiplicacoes_modulo_11(num)
